@@ -107,15 +107,6 @@ public class SalariesController
             {
                 salariesForm.setEmpId(KeyUtil.genUniqueKey());
             }
-            // 最终工资
-            BigDecimal salFinal = new BigDecimal(BigInteger.ZERO);
-
-            // 计算总工资
-            salFinal = salaries.getSalBase().add(salaries.getSalBonus()).add(salaries.getSalBenefits());
-            salFinal = salFinal.subtract(salaries.getSalFine());
-
-            // 设置salaries中的总工资
-            salaries.setSalFinal(salFinal);
 
             // 将form中的数据传到salaries对象中
             BeanUtils.copyProperties(salariesForm,salaries);
