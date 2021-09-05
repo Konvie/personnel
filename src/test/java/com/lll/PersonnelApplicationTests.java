@@ -1,4 +1,4 @@
-package com.lll.personnel;
+package com.lll;
 
 import org.junit.Test;
 import org.springframework.boot.test.context.SpringBootTest;
