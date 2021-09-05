@@ -111,7 +111,8 @@ public class SalariesController
             BigDecimal salFinal = new BigDecimal(BigInteger.ZERO);
 
             // 计算总工资
-            salFinal = salaries.getSalBase().add(salaries.getSalBonus()).add(salaries.getSalBenefits()).subtract(salaries.getSalFine());
+            salFinal = salaries.getSalBase().add(salaries.getSalBonus()).add(salaries.getSalBenefits());
+            salFinal = salFinal.subtract(salaries.getSalFine());
 
             // 设置salaries中的总工资
             salaries.setSalFinal(salFinal);
