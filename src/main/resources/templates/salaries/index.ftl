@@ -18,11 +18,11 @@
                                 </div>
                                 <div class="form-group">
                                     <label>基本金额</label>
-                                    <input name="salBase" type="text" class="form-control" value="${(salaries.salBase)!''}"/>
+                                    <input name="salBase" type="number" class="form-control" value="${(salaries.salBase)!''}"/>
                                 </div>
                                 <div class="form-group">
                                     <label>奖金金额</label>
-                                    <input name="salBonus" type="text" class="form-control" value="${(salaries.salBonus)!''}"/>
+                                    <input name="salBonus" type="number" class="form-control" value="${(salaries.salBonus)!''}"/>
                                 </div>
                                 <div class="form-group">
                                     <label>奖金描述</label>
@@ -30,7 +30,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label>扣除金额</label>
-                                    <input name="salFine" type="text" class="form-control" value="${(salaries.salFine)!''}"/>
+                                    <input name="salFine" type="number" class="form-control" value="${(salaries.salFine)!''}"/>
                                 </div>
                                 <div class="form-group">
                                     <label>扣除描述</label>
@@ -38,11 +38,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label>保险福利</label>
-                                    <input name="salBenefits" type="text" class="form-control" value="${(salaries.salBenefits)!''}"/>
-                                </div>
-                                <div class="form-group">
-                                    <label>最终金额</label>
-                                    <input name="salFinal" type="text" class="form-control" value="${(salaries.salFinal)!''}"/>
+                                    <input name="salBenefits" type="number" class="form-control" value="${(salaries.salBenefits)!''}"/>
                                 </div>
                                 <div class="form-group">
                                     <label>备注</label>
