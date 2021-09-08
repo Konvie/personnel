@@ -11,6 +11,9 @@
                 <div class="container-fluid">
                     <div class="row clearfix">
                         <div class="col-md-12 column">
+                            <#--显示系统时间-->
+                            <div class="showTime">当前时间：2021年8月17-12时35分16秒</div>
+
                             <form role="form" method="post" action="/personnel/salaries/save">
                                 <div class="form-group">
                                     <label>员工姓名</label>
