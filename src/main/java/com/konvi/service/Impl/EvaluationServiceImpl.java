@@ -74,10 +74,9 @@ public class EvaluationServiceImpl implements IEvaluationService
         Evaluation evaluation=evaluationDAO.findById(empId).orElse(null);
 
         //如果员工不存在，就抛出异常：员工不存在
-        if (evaluation==null)
+        if (evaluation == null)
         {
-            throw new PersonnelException(ResultEnum.EMPLOYEE_NOT_EXIST);
-
+            throw new PersonnelException(ResultEnum.EMPLOYEE_EVALUATION_NOT_EXIST);
         }
         else
         {

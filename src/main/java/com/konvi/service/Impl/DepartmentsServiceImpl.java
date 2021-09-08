@@ -52,13 +52,13 @@ public class DepartmentsServiceImpl implements IDepartmentsService
     /**  修改 */
     public Departments update(Departments departments)
     {
-        //根据员工ID 查询员工信息
+        //根据部门 查询部门信息
         Departments department=departmentsDAO.findById(departments.getDepId()).orElse(null);
 
-        //如果员工不存在，就抛出异常：员工不存在
+        //如果部门不存在，就抛出异常：员工不存在
         if (department==null)
         {
-            throw new PersonnelException(ResultEnum.EMPLOYEE_NOT_EXIST);
+            throw new PersonnelException(ResultEnum.DEPARTMENT_NOT_EXIST);
         }
 
         //TODO 修改员工信息
@@ -69,13 +69,13 @@ public class DepartmentsServiceImpl implements IDepartmentsService
     @Override
     public void delete(String depId)
     {
-        //根据员工ID 查询员工信息
+        //根据部门ID 查询员工信息
         Departments departments=departmentsDAO.findById(depId).orElse(null);
 
-        //如果员工不存在，就抛出异常：员工不存在
+        //如果部门不存在，就抛出异常：员工不存在
         if (departments==null)
         {
-            throw new PersonnelException(ResultEnum.EMPLOYEE_NOT_EXIST);
+            throw new PersonnelException(ResultEnum.DEPARTMENT_NOT_EXIST);
 
         }
         else

@@ -91,5 +91,27 @@ public class DepartmentsController {
     return new ModelAndView("common/success");
   }
 
+  /**
+   * 删除
+   * @param depId
+   * @param map
+   * @return
+   */
+  @GetMapping("/delete")
+  public ModelAndView delete(@RequestParam("depId")String depId,Map<String,Object>map)
+  {
+    try
+    {
+      departmentsService.delete(depId);
+    } catch (PersonnelException e)
+    {
+      map.put("msg",e.getMessage());
+      map.put("url","/personnel/departments/list");
+      return new ModelAndView("common/error",map);
+    }
+    map.put("url","/personnel/departments/list");
+    return new ModelAndView("common/success",map);
+  }
+
 }
 

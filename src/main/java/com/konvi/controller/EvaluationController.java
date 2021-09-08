@@ -108,4 +108,20 @@ public class EvaluationController
     }
 
     /** 删除 */
+    @GetMapping("/delete")
+    public ModelAndView delete(@RequestParam("empId")String empId,Map<String,Object>map)
+    {
+        try
+        {
+            evaluationService.delete(empId);
+        } catch (PersonnelException e)
+        {
+            map.put("msg",e.getMessage());
+            map.put("url","/personnel/evaluation/list");
+            return new ModelAndView("common/error",map);
+        }
+        map.put("msg",ResultEnum.EMPLOYEE_EVALUATION_SUCCESS.getMessage());
+        map.put("url","/personnel/evaluation/list");
+        return new ModelAndView("common/success",map);
+    }
 }

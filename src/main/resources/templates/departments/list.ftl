@@ -38,6 +38,7 @@
 
 
                                     <td><a href="/personnel/departments/index?depId=${departments.depId}">修改</a></td>
+                                    <td><a href="/personnel/departments/delete?depId=${departments.depId}">删除</a></td>
 
                                 </tr>
                             </#list>

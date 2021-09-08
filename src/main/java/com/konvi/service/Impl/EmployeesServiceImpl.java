@@ -1,7 +1,11 @@
 package com.konvi.service.Impl;
 
 import com.konvi.DAO.IEmployeesDAO;
+import com.konvi.DAO.IEvaluationDAO;
+import com.konvi.DAO.ISalariesDAO;
 import com.konvi.entity.Employees;
+import com.konvi.entity.Evaluation;
+import com.konvi.entity.Salaries;
 import com.konvi.enums.ResultEnum;
 import com.konvi.exception.PersonnelException;
 import com.konvi.service.IEmployeesService;
@@ -18,6 +22,11 @@ public class EmployeesServiceImpl implements IEmployeesService
     @Autowired
     private IEmployeesDAO employeesDAO;
 
+    @Autowired
+    private ISalariesDAO salariesDAO;
+
+    @Autowired
+    private IEvaluationDAO evaluationDAO;
 
     /**
      * 根据员工ID 查询员工信息
@@ -90,17 +99,31 @@ public class EmployeesServiceImpl implements IEmployeesService
         //根据员工ID 查询员工信息
         Employees employee=employeesDAO.findById(empId).orElse(null);
 
+        // 根据员工ID 查询工资信息
+        Salaries salaries = salariesDAO.findById(empId).orElse(null);
+
+        // 根据员工ID 查询评价信息
+        Evaluation evaluation = evaluationDAO.findById(empId).orElse(null);
+
         //如果员工不存在，就抛出异常：员工不存在
-        if (employee==null)
+        if (employee == null)
         {
             throw new PersonnelException(ResultEnum.EMPLOYEE_NOT_EXIST);
-
         }
         else
         {
            employeesDAO.delete(employee);
         }
 
+        if (salaries != null)
+        {
+            salariesDAO.delete(salaries);
+        }
+
+        if (evaluation != null)
+        {
+            evaluationDAO.delete(evaluation);
+        }
 
     }
 }

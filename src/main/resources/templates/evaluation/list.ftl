@@ -41,7 +41,7 @@
                                     <td>${evaluation.evaRemarks}</td>
 
                                     <td><a href="/personnel/evaluation/index?empId=${evaluation.empId}">修改</a></td>
-
+                                    <td><a href="/personnel/evaluation/delete?empId=${evaluation.empId}">删除</a></td>
                                 </tr>
                             </#list>
                         </#if>

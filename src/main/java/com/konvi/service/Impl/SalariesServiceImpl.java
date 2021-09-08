@@ -1,7 +1,11 @@
 package com.konvi.service.Impl;
 
+import com.konvi.DAO.IEmployeesDAO;
 import com.konvi.DAO.ISalariesDAO;
+import com.konvi.entity.Employees;
 import com.konvi.entity.Salaries;
+import com.konvi.enums.ResultEnum;
+import com.konvi.exception.PersonnelException;
 import com.konvi.service.ISalariesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -22,6 +26,7 @@ public class SalariesServiceImpl implements ISalariesService
 {
     @Autowired
     private ISalariesDAO salariesDAO;
+
 
     /**
      * 根据员工编号查询员工工资信息
@@ -61,9 +66,21 @@ public class SalariesServiceImpl implements ISalariesService
      * @param empId
      */
     @Override
-    public void deleteById(String empId)
+    public void delete(String empId)
     {
-        salariesDAO.deleteById(empId);
+        //根据员工ID 查询员工信息
+        Salaries salaries = salariesDAO.findById(empId).orElse(null);
+
+        //如果员工不存在，就抛出异常：员工不存在
+        if (salaries == null)
+        {
+            throw new PersonnelException(ResultEnum.EMPLOYEE_SALARIES_NOT_EXIST);
+        }
+
+        else
+        {
+            salariesDAO.delete(salaries);
+        }
     }
 
 }

@@ -28,7 +28,7 @@
                             <th>保险福利</th>
                             <th>最终金额</th>
                             <th>备注</th>
-                            <th>操作</th>
+                            <th colspan="2">操作</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -46,6 +46,7 @@
                                 <td>${salaries.salFinal}</td>
                                 <td>${salaries.salRemarks}</td>
                                 <td><a href="/personnel/salaries/index?empId=${salaries.empId}">修改</a></td>
+                                <td><a href="/personnel/salaries/delete?empId=${salaries.empId}">删除</a></td>
                             </tr>
                         </#list>
                         </tbody>

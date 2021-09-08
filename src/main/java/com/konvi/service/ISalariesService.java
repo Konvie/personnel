@@ -38,6 +38,6 @@ public interface ISalariesService
      * @param empId
      * @return
      */
-    void deleteById(String empId);
+    void delete(String empId);
 
 }

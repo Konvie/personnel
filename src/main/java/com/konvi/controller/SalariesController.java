@@ -3,6 +3,7 @@ package com.konvi.controller;
 
 import com.konvi.entity.Salaries;
 import com.konvi.enums.ResultEnum;
+import com.konvi.exception.PersonnelException;
 import com.konvi.exception.SalariesException;
 import com.konvi.form.SalariesForm;
 import com.konvi.service.ISalariesService;
@@ -98,6 +99,7 @@ public class SalariesController
     public ModelAndView save(@Valid SalariesForm salariesForm, BindingResult bindingResult, HttpServletRequest request)
     {
         HttpSession session = request.getSession();
+        // bindingResult.hasErrors()是为了验证@Valid后面的bean 里是否有不符合注解条件的错误信息
         if (bindingResult.hasErrors())
         {
             session.setAttribute("msg",bindingResult.getFieldError().getDefaultMessage());
@@ -108,6 +110,7 @@ public class SalariesController
         try
         {
             // 如果员工编号不为空,说明是修改工资信息
+            // StringUtils.hasText(String) 若String值为null或''等,则返回值为false
             if (StringUtils.hasText(salariesForm.getEmpId()))
             {
                 salaries = salariesService.findById(salariesForm.getEmpId());
@@ -141,5 +144,28 @@ public class SalariesController
         session.setAttribute("msg", ResultEnum.EMPLOYEE_SALARIES_SUCCESS.getMessage());
         session.setAttribute("url","/personnel/salaries/list");
         return new ModelAndView("common/success");
+    }
+
+    /**
+     * 删除 工资表信息
+     * @param empId
+     * @param map
+     * @return
+     */
+    @GetMapping("/delete")
+    public ModelAndView delete(@RequestParam("empId")String empId,Map<String,Object>map)
+    {
+        try
+        {
+            salariesService.delete(empId);
+        } catch (SalariesException e)
+        {
+            map.put("msg",e.getMessage());
+            map.put("url","/personnel/salaries/list");
+            return new ModelAndView("common/error",map);
+        }
+        map.put("msg",ResultEnum.EMPLOYEE_SALARIES_SUCCESS.getMessage());
+        map.put("url","/personnel/salaries/list");
+        return new ModelAndView("common/success",map);
     }
 }

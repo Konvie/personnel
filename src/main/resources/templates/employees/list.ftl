@@ -61,7 +61,7 @@
                                     <td>${employees.empRemarks}</td>
 
                                     <td><a href="/personnel/employees/index?empId=${employees.empId}">修改</a></td>
-
+                                    <td><a href="/personnel/employees/delete?empId=${employees.empId}">删除</a></td>
                                 </tr>
                             </#list>
                         </#if>
