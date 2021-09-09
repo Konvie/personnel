@@ -1,0 +1,48 @@
+<head>
+    <meta charset="UTF-8" />
+    <title>人事管理系统登录</title>
+    <style type="text/css">
+        .box{
+            position: absolute;
+            left:50%;
+            top:50%;
+            transform: translate(-50%, -50%);
+        }
+
+
+        ul li{
+            list-style: none;
+        }
+    </style>
+</head>
+<body background="https://tva3.sinaimg.cn/large/006x3t5Xgy1guaf9qalkfj60zk0k0n4302.jpg">
+<div class="box">
+    <div class="box1">
+        <form name="form" accept-charset="utf-8"  action="/personnel/loginVerify" method="post">
+            <ul >
+                <h2>欢迎登录人事管理系统</h2>
+                <li>
+                    <label for="username"  class="input-tips2"><strong>用户名：</strong></label>
+                    <div class="inputOuter2">
+                        <input type="text" id="username" name="username" maxlength="16" />
+                    </div>
+                </li>
+                <li>
+                    <label for="password" class="input-tips2"><strong>密码：</strong></label>
+                    <div >
+                        <input type="password" id="password"  name="password" maxlength="16"/>
+                    </div>
+                </li>
+                <li>
+                    <div >
+                        <h4>
+                            <input type="submit" value="登录"/>
+                        </h4>
+                    </div>
+                </li>
+            </ul>
+        </form>
+    </div>
+</div>
+
+</body>
