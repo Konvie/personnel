@@ -1,5 +1,6 @@
 package com.konvi.service;
 
+import com.konvi.dto.EmployeesDTO;
 import com.konvi.entity.Employees;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -42,5 +43,14 @@ public interface IEmployeesService
      */
     void delete(String empId);
     //EmployeesDTO delete(String empId);
+
+    /**
+     * 根据员工姓名查找员工
+     * @param empName
+     * @return
+     */
+    EmployeesDTO findByEmpName(String empName);
+
+    // List<EmployeesDTO> findByEmpName(String empName);
 
 }

@@ -11,5 +11,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
  */
 public interface ISalariesDAO extends JpaRepository<Salaries,String>
 {
-
+    // 根据员工姓名 查找工资信息
+    Salaries findByEmpName(String empName);
 }

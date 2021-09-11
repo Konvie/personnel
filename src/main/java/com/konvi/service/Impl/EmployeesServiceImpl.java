@@ -3,12 +3,14 @@ package com.konvi.service.Impl;
 import com.konvi.DAO.IEmployeesDAO;
 import com.konvi.DAO.IEvaluationDAO;
 import com.konvi.DAO.ISalariesDAO;
+import com.konvi.dto.EmployeesDTO;
 import com.konvi.entity.Employees;
 import com.konvi.entity.Evaluation;
 import com.konvi.entity.Salaries;
 import com.konvi.enums.ResultEnum;
 import com.konvi.exception.PersonnelException;
 import com.konvi.service.IEmployeesService;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -125,5 +127,26 @@ public class EmployeesServiceImpl implements IEmployeesService
             evaluationDAO.delete(evaluation);
         }
 
+    }
+
+    /**
+     * 根据员工姓名 查询员工信息
+     * @param empName
+     * @return
+     */
+    @Override
+    public EmployeesDTO findByEmpName(String empName)
+    {
+        // 根据员工姓名 查询员工信息
+        // TODO 考虑到重名情况 用List<employeesDTO>实现
+        Employees employees = employeesDAO.findByEmpName(empName);
+        if (employees == null)
+        {
+            throw new PersonnelException(ResultEnum.EMPLOYEE_NOT_EXIST);
+        }
+
+        EmployeesDTO  employeesDTO = new EmployeesDTO();
+        BeanUtils.copyProperties(employees, employeesDTO);
+        return employeesDTO;
     }
 }

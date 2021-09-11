@@ -1,5 +1,6 @@
 package com.konvi.controller;
 
+import com.konvi.dto.EmployeesDTO;
 import com.konvi.entity.Departments;
 import com.konvi.entity.Employees;
 import com.konvi.enums.ResultEnum;
@@ -8,6 +9,7 @@ import com.konvi.form.EmployeeForm;
 import com.konvi.service.IDepartmentsService;
 import com.konvi.service.IEmployeesService;
 import com.konvi.utils.KeyUtil;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -33,6 +35,7 @@ import java.util.Map;
  */
 @Controller
 @RequestMapping("/employees")
+@Slf4j
 public class EmployeesController
 {
     //员工 Service
@@ -48,7 +51,7 @@ public class EmployeesController
      */
     @GetMapping("/list")
     public ModelAndView list(@RequestParam(value = "page",defaultValue = "1") Integer page,
-                             @RequestParam(value = "size",defaultValue = "10") Integer size,
+                             @RequestParam(value = "size",defaultValue = "4") Integer size,
                              Map<String,Object> map)
     {
         PageRequest pageRequest=PageRequest.of(page-1,size);
@@ -197,5 +200,29 @@ public class EmployeesController
         map.put("msg",ResultEnum.EMPLOYEE_SUCCESS.getMessage());
         map.put("url","/personnel/employees/list");
         return new ModelAndView("common/success",map);
+    }
+
+    @GetMapping("/search")
+    public ModelAndView search(@RequestParam(value = "empName", required = false) String empName, Map<String, Object> map)
+    {
+        return new ModelAndView("employees/search", map);
+    }
+
+
+    @GetMapping("/result")
+    public ModelAndView result(@RequestParam("empName") String empName, Map<String, Object> map, HttpServletRequest request) {
+        String contextPath = "";
+        EmployeesDTO employeesDTO = new EmployeesDTO();
+        try {
+            employeesDTO = employeesService.findByEmpName(empName);
+        } catch (Exception e) {
+            log.error("发生异常{}", e);
+            contextPath = request.getContextPath(); // 灵活获取应用名 如/personnel
+            map.put("url", contextPath + "/employees/search");
+            map.put("msg", e.getMessage());
+            return new ModelAndView("common/error", map);
+        }
+        map.put("employees", employeesDTO);
+        return new ModelAndView("employees/result", map);
     }
 }

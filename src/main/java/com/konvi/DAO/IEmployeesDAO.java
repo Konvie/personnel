@@ -11,9 +11,17 @@ import java.util.List;
 public interface IEmployeesDAO extends JpaRepository<Employees,String>
 {
     /**
-     * 根据员工姓名 查询相关员工
+     * 根据员工姓名 查询相关员工 (考虑重名情况)
      * @return
      */
     List<Employees> queryByEmpName(String empName);
+
+
+    /**
+     * 根据员工姓名 查询相关员工 (不考虑重名)
+     * @param empName
+     * @return
+     */
+    Employees findByEmpName(String empName);
 
 }

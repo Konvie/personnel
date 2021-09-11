@@ -61,6 +61,11 @@ public class SalariesDTO
     private BigDecimal salBenefits;
 
     /**
+     * 最终金额
+     */
+    private BigDecimal salFinal;
+
+    /**
      * 备注
      */
     private String salRemarks;

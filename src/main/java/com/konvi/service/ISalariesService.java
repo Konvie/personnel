@@ -1,5 +1,6 @@
 package com.konvi.service;
 
+import com.konvi.dto.SalariesDTO;
 import com.konvi.entity.Salaries;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -40,4 +41,6 @@ public interface ISalariesService
      */
     void delete(String empId);
 
+    // 根据员工姓名查找员工工资信息
+    SalariesDTO findByEmpName(String empName);
 }

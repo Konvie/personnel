@@ -1,6 +1,7 @@
 package com.konvi.controller;
 
 
+import com.konvi.dto.SalariesDTO;
 import com.konvi.entity.Salaries;
 import com.konvi.enums.ResultEnum;
 import com.konvi.exception.PersonnelException;
@@ -167,5 +168,30 @@ public class SalariesController
         map.put("msg",ResultEnum.EMPLOYEE_SALARIES_SUCCESS.getMessage());
         map.put("url","/personnel/salaries/list");
         return new ModelAndView("common/success",map);
+    }
+
+    @GetMapping("/search")
+    public ModelAndView search(@RequestParam(value = "empName", required = false) String empName, Map<String, Object> map)
+    {
+        return new ModelAndView("salaries/search", map);
+    }
+
+
+    @GetMapping("/result")
+    public ModelAndView result(@RequestParam("empName") String empName, Map<String, Object> map, HttpServletRequest request)
+    {
+        String contextPath = "";
+        SalariesDTO salariesDTO = new SalariesDTO();
+        try {
+            salariesDTO = salariesService.findByEmpName(empName);
+        } catch (Exception e) {
+            log.error("发生异常{}", e);
+            contextPath = request.getContextPath(); // 灵活获取应用名 如/personnel
+            map.put("url", contextPath + "/salaries/search");
+            map.put("msg", e.getMessage());
+            return new ModelAndView("common/error", map);
+        }
+        map.put("salaries", salariesDTO);
+        return new ModelAndView("salaries/result", map);
     }
 }
