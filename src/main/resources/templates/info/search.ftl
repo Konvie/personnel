@@ -17,7 +17,7 @@
                 <div class="col-md-12 column">
                     <#--显示系统时间-->
                     <div class="showTime">当前时间：2021年8月17-12时35分16秒</div>
-                    <form role="form" method="get" action="/personnel/salaries/result?empName=empName">
+                    <form role="form" method="get" action="/personnel/information/result?empName=empName">
                         <div class="form-group">
                             <label>输入员工姓名</label>
                             <input type="text" class="form-control" id="productPrice" name="empName"/>

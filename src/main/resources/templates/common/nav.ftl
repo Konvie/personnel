@@ -23,9 +23,9 @@
 
 
                 <li class="dropdown-header">工资发放</li>
-                <li><a href="/personnel/salaries/list">列表</a></li>
-                <li><a href="/personnel/salaries/index">新增</a></li>
-                <li><a href="/personnel/salaries/search">查询</a></li>
+                <li><a href="/personnel/information/list">列表</a></li>
+                <li><a href="/personnel/information/index">新增</a></li>
+                <li><a href="/personnel/information/search">查询</a></li>
             </ul>
         </li>
 

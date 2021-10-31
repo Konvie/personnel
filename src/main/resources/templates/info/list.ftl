@@ -32,21 +32,21 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <#list salariesPageList.content as salaries>
+                        <#list salariesPageList.content as information>
                             <tr>
                                 <td>${salaries_index+1}</td>
-                                <td>${salaries.empId}</td>
-                                <td>${salaries.empName}</td>
-                                <td>${salaries.salBase}</td>
-                                <td>${salaries.salBonus}</td>
-                                <td>${salaries.salBonusDescribes}</td>
-                                <td>${salaries.salFine}</td>
-                                <td>${salaries.salFineDescribes}</td>
-                                <td>${salaries.salBenefits}</td>
-                                <td>${salaries.salFinal}</td>
-                                <td>${salaries.salRemarks}</td>
-                                <td><a href="/personnel/salaries/index?empId=${salaries.empId}">修改</a></td>
-                                <td><a href="/personnel/salaries/delete?empId=${salaries.empId}">删除</a></td>
+                                <td>${information.empId}</td>
+                                <td>${information.empName}</td>
+                                <td>${information.salBase}</td>
+                                <td>${information.salBonus}</td>
+                                <td>${information.salBonusDescribes}</td>
+                                <td>${information.salFine}</td>
+                                <td>${information.salFineDescribes}</td>
+                                <td>${information.salBenefits}</td>
+                                <td>${information.salFinal}</td>
+                                <td>${information.salRemarks}</td>
+                                <td><a href="/personnel/information/index?empId=${information.empId}">修改</a></td>
+                                <td><a href="/personnel/information/delete?empId=${information.empId}">删除</a></td>
                             </tr>
                         </#list>
                         </tbody>
@@ -63,7 +63,7 @@
                             </li>
                         <#else>
                             <li>
-                                <a href="/personnel/salaries/list?page=${currentPage - 1}&size=${size}">上一页</a>
+                                <a href="/personnel/information/list?page=${currentPage - 1}&size=${size}">上一页</a>
                             </li>
                         </#if>
                         <#--上一页处理 end-->
@@ -72,11 +72,11 @@
                         <#--当前页面置灰-->
                             <#if currentPage == index>
                                 <li class="disabled">
-                                    <a href="/personnel/salaries/list?page=${index}&size=${size}">${index}</a>
+                                    <a href="/personnel/information/list?page=${index}&size=${size}">${index}</a>
                                 </li>
                             <#else>
                                 <li>
-                                    <a href="/personnel/salaries/list?page=${index}&size=${size}">${index}</a>
+                                    <a href="/personnel/information/list?page=${index}&size=${size}">${index}</a>
                                 </li>
                             </#if>
                         </#list>
@@ -88,7 +88,7 @@
                             </li>
                         <#else>
                             <li>
-                                <a href="/personnel/salaries/list?page=${currentPage + 1}&size=${size}">上一页</a>
+                                <a href="/personnel/information/list?page=${currentPage + 1}&size=${size}">上一页</a>
                             </li>
                         </#if>
                         <#-- 下一页处理 end-->

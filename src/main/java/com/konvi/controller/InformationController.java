@@ -1,13 +1,12 @@
 package com.konvi.controller;
 
 
-import com.konvi.dto.SalariesDTO;
-import com.konvi.entity.Salaries;
+import com.konvi.dto.InformationDTO;
+import com.konvi.entity.Information;
 import com.konvi.enums.ResultEnum;
-import com.konvi.exception.PersonnelException;
 import com.konvi.exception.SalariesException;
-import com.konvi.form.SalariesForm;
-import com.konvi.service.ISalariesService;
+import com.konvi.form.InformationForm;
+import com.konvi.service.IInformationService;
 import com.konvi.utils.KeyUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
@@ -31,7 +30,7 @@ import java.util.Map;
 
 
 /**
- * 工资表 Controller层
+ * 背景表 Controller层
  * http://192.168.1.3/:8080/personnel/salaries/list
  * @author konvi
  * @version 1.0
@@ -39,11 +38,11 @@ import java.util.Map;
  */
 @Slf4j
 @Controller
-@RequestMapping("/salaries")
-public class SalariesController
+@RequestMapping("/info")
+public class InformationController
 {
     @Autowired
-    private ISalariesService salariesService;
+    private IInformationService salariesService;
 
     /**
      * 分页查询工资表
@@ -57,7 +56,7 @@ public class SalariesController
     {
         PageRequest pageRequest = PageRequest.of(page - 1,size);
 
-        Page<Salaries> salariesPageList = salariesService.findAll(pageRequest);
+        Page<Information> salariesPageList = salariesService.findAll(pageRequest);
 
         // 带分页显示查询到的工资列表
         map.put("salariesPageList",salariesPageList);
@@ -68,7 +67,7 @@ public class SalariesController
         // 设置每页显示多少条数据
         map.put("size",size);
 
-        return new ModelAndView("salaries/list",map);
+        return new ModelAndView("info/list",map);
     }
 
     /**
@@ -82,8 +81,8 @@ public class SalariesController
     {
         if (empId != null)
         {
-            Salaries salaries = salariesService.findById(empId);
-            map.put("salaries",salaries);
+            Information information = salariesService.findById(empId);
+            map.put("salaries", information);
         }
         return new ModelAndView("salaries/index",map);
     }
@@ -91,13 +90,13 @@ public class SalariesController
 
     /**
      * 保存/更新 工资表信息
-     * @param salariesForm
+     * @param informationForm
      * @param bindingResult
      * @param request
      * @return
      */
     @PostMapping("/save")
-    public ModelAndView save(@Valid SalariesForm salariesForm, BindingResult bindingResult, HttpServletRequest request)
+    public ModelAndView save(@Valid InformationForm informationForm, BindingResult bindingResult, HttpServletRequest request)
     {
         HttpSession session = request.getSession();
         // bindingResult.hasErrors()是为了验证@Valid后面的bean 里是否有不符合注解条件的错误信息
@@ -107,33 +106,33 @@ public class SalariesController
             session.setAttribute("url",request.getContextPath()+"/salaries/index");
             return new ModelAndView("common/error");
         }
-        Salaries salaries = new Salaries();
+        Information information = new Information();
         try
         {
             // 如果员工编号不为空,说明是修改工资信息
             // StringUtils.hasText(String) 若String值为null或''等,则返回值为false
-            if (StringUtils.hasText(salariesForm.getEmpId()))
+            if (StringUtils.hasText(informationForm.getEmpId()))
             {
-                salaries = salariesService.findById(salariesForm.getEmpId());
+                information = salariesService.findById(informationForm.getEmpId());
             } else // 如果员工编号为空,说明是新建工资信息
             {
-                salariesForm.setEmpId(KeyUtil.genUniqueKey());
+                informationForm.setEmpId(KeyUtil.genUniqueKey());
             }
 
             // 将form中的数据传到salaries对象中
-            BeanUtils.copyProperties(salariesForm,salaries);
+            BeanUtils.copyProperties(informationForm, information);
 
-            // 最终金额
+            /*// 最终金额
             BigDecimal salFinal;
 
             // 计算最终金额
-            salFinal = salaries.getSalBase().add(salaries.getSalBonus()).add(salaries.getSalBenefits()).subtract(salaries.getSalFine());
+            salFinal = information.getSalBase().add(information.getSalBonus()).add(information.getSalBenefits()).subtract(information.getSalFine());
 
             // 将最终金额传入数据库中
-            salaries.setSalFinal(salFinal);
+            information.setSalFinal(salFinal);*/
 
-            // 工资信息入库
-            salariesService.save(salaries);
+            // 背景信息入库
+            salariesService.save(information);
 
         } catch (SalariesException e)
         {
@@ -148,7 +147,7 @@ public class SalariesController
     }
 
     /**
-     * 删除 工资表信息
+     * 删除 背景表信息
      * @param empId
      * @param map
      * @return
@@ -173,7 +172,7 @@ public class SalariesController
     @GetMapping("/search")
     public ModelAndView search(@RequestParam(value = "empName", required = false) String empName, Map<String, Object> map)
     {
-        return new ModelAndView("salaries/search", map);
+        return new ModelAndView("info/search", map);
     }
 
 
@@ -181,9 +180,9 @@ public class SalariesController
     public ModelAndView result(@RequestParam("empName") String empName, Map<String, Object> map, HttpServletRequest request)
     {
         String contextPath = "";
-        SalariesDTO salariesDTO = new SalariesDTO();
+        InformationDTO informationDTO = new InformationDTO();
         try {
-            salariesDTO = salariesService.findByEmpName(empName);
+            informationDTO = salariesService.findByEmpName(empName);
         } catch (Exception e) {
             log.error("发生异常{}", e);
             contextPath = request.getContextPath(); // 灵活获取应用名 如/personnel
@@ -191,7 +190,7 @@ public class SalariesController
             map.put("msg", e.getMessage());
             return new ModelAndView("common/error", map);
         }
-        map.put("salaries", salariesDTO);
-        return new ModelAndView("salaries/result", map);
+        map.put("salaries", informationDTO);
+        return new ModelAndView("info/result", map);
     }
 }

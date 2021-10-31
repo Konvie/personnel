@@ -1,13 +1,11 @@
 package com.konvi.service.Impl;
 
-import com.konvi.DAO.IEmployeesDAO;
-import com.konvi.DAO.ISalariesDAO;
-import com.konvi.dto.SalariesDTO;
-import com.konvi.entity.Employees;
-import com.konvi.entity.Salaries;
+import com.konvi.DAO.IInformationDAO;
+import com.konvi.dto.InformationDTO;
+import com.konvi.entity.Information;
 import com.konvi.enums.ResultEnum;
 import com.konvi.exception.PersonnelException;
-import com.konvi.service.ISalariesService;
+import com.konvi.service.IInformationService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -24,10 +22,10 @@ import javax.transaction.Transactional;
  */
 @Service
 @Transactional
-public class SalariesServiceImpl implements ISalariesService
+public class InformationServiceImpl implements IInformationService
 {
     @Autowired
-    private ISalariesDAO salariesDAO;
+    private IInformationDAO informationDAO;
 
 
     /**
@@ -36,9 +34,9 @@ public class SalariesServiceImpl implements ISalariesService
      * @return
      */
     @Override
-    public Salaries findById(String empId)
+    public Information findById(String empId)
     {
-        return salariesDAO.findById(empId).orElse(null);
+        return informationDAO.findById(empId).orElse(null);
     }
 
     /**
@@ -47,20 +45,20 @@ public class SalariesServiceImpl implements ISalariesService
      * @return
      */
     @Override
-    public Page<Salaries> findAll(Pageable pageable)
+    public Page<Information> findAll(Pageable pageable)
     {
-        return salariesDAO.findAll(pageable);
+        return informationDAO.findAll(pageable);
     }
 
     /**
      * 新增员工工资信息
-     * @param salaries
+     * @param information
      * @return
      */
     @Override
-    public Salaries save(Salaries salaries)
+    public Information save(Information information)
     {
-        return salariesDAO.save(salaries);
+        return informationDAO.save(information);
     }
 
     /**
@@ -71,17 +69,17 @@ public class SalariesServiceImpl implements ISalariesService
     public void delete(String empId)
     {
         //根据员工ID 查询员工信息
-        Salaries salaries = salariesDAO.findById(empId).orElse(null);
+        Information information = informationDAO.findById(empId).orElse(null);
 
         //如果员工不存在，就抛出异常：员工不存在
-        if (salaries == null)
+        if (information == null)
         {
             throw new PersonnelException(ResultEnum.EMPLOYEE_SALARIES_NOT_EXIST);
         }
 
         else
         {
-            salariesDAO.delete(salaries);
+            informationDAO.delete(information);
         }
     }
 
@@ -91,18 +89,18 @@ public class SalariesServiceImpl implements ISalariesService
      * @return
      */
     @Override
-    public SalariesDTO findByEmpName(String empName)
+    public InformationDTO findByEmpName(String empName)
     {
         // 根据员工姓名查询 员工信息
-        Salaries salaries = salariesDAO.findByEmpName(empName);
-        if (salaries == null)
+        Information information = informationDAO.findByEmpName(empName);
+        if (information == null)
         {
             throw new PersonnelException(ResultEnum.EMPLOYEE_SALARIES_NOT_EXIST);
         }
 
-        SalariesDTO  salariesDTO = new SalariesDTO();
-        BeanUtils.copyProperties(salaries, salariesDTO);
-        return salariesDTO;
+        InformationDTO informationDTO = new InformationDTO();
+        BeanUtils.copyProperties(information, informationDTO);
+        return informationDTO;
     }
 
 }

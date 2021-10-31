@@ -1,23 +1,18 @@
-package com.konvi.entity;
+package com.konvi.dto;
 
 import lombok.Data;
-import org.hibernate.annotations.DynamicUpdate;
 
-import javax.persistence.Entity;
 import javax.persistence.Id;
-import java.io.Serializable;
 import java.math.BigDecimal;
 
 /**
- * 工资表 JavaBean
+ * 工资传输对象
  * @author konvi
  * @version 1.0
- * @date 2021/9/1
+ * @date 2021/9/3
  */
-@Entity
 @Data
-@DynamicUpdate
-public class Salaries implements Serializable
+public class InformationDTO
 {
     /**
      * 序列化版本号

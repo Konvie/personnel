@@ -35,18 +35,18 @@
 
                         <tbody>
                         <tr>
-                            <td>${salaries.empId}</td>
-                            <td>${salaries.empName}</td>
-                            <td>${salaries.salBase}</td>
-                            <td>${salaries.salBonus}</td>
-                            <td>${salaries.salBonusDescribes}</td>
-                            <td>${salaries.salFine}</td>
-                            <td>${salaries.salFineDescribes}</td>
-                            <td>${salaries.salBenefits}</td>
-                            <td>${salaries.salFinal}</td>
-                            <td>${salaries.salRemarks}</td>
-                            <td><a href="/personnel/salaries/index?empId=${salaries.empId}">修改</a></td>
-                            <td><a href="/personnel/salaries/delete?empId=${salaries.empId}">删除</a></td>
+                            <td>${information.empId}</td>
+                            <td>${information.empName}</td>
+                            <td>${information.salBase}</td>
+                            <td>${information.salBonus}</td>
+                            <td>${information.salBonusDescribes}</td>
+                            <td>${information.salFine}</td>
+                            <td>${information.salFineDescribes}</td>
+                            <td>${information.salBenefits}</td>
+                            <td>${information.salFinal}</td>
+                            <td>${information.salRemarks}</td>
+                            <td><a href="/personnel/information/index?empId=${information.empId}">修改</a></td>
+                            <td><a href="/personnel/information/delete?empId=${information.empId}">删除</a></td>
                         </tr>
                         </tbody>
 

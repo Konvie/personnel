@@ -1,7 +1,7 @@
 package com.konvi.form;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.konvi.enums.EmpMaritalEnum;
+import com.konvi.enums.InfMaritalEnum;
 import com.konvi.enums.EmpSexEnum;
 import com.konvi.utils.EnumUtil;
 import lombok.Data;
@@ -66,7 +66,7 @@ public class EmployeeForm
      * 1 为已婚
      * 0 为未婚
      */
-    private Integer empMarital= EmpMaritalEnum.UNMARRIED.getCode();
+    private Integer empMarital= InfMaritalEnum.UNMARRIED.getCode();
 
     /**
      * 备注
@@ -90,9 +90,9 @@ public class EmployeeForm
      * 获取婚姻状态的枚举类
      */
     @JsonIgnore
-    public EmpMaritalEnum getEmpMaritalEnum()
+    public InfMaritalEnum getEmpMaritalEnum()
     {
-        return EnumUtil.getByCode(empMarital,EmpMaritalEnum.class);
+        return EnumUtil.getByCode(empMarital, InfMaritalEnum.class);
     }
 
 }

@@ -2,14 +2,13 @@ package com.konvi.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.konvi.enums.EmpMaritalEnum;
+import com.konvi.enums.InfMaritalEnum;
 import com.konvi.enums.EmpSexEnum;
 import com.konvi.utils.EnumUtil;
 import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
-import org.hibernate.annotations.GenericGenerator;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
@@ -34,8 +33,8 @@ public class Employees implements Serializable
     @Id
     //用自定义主键策略 生成自定义主键ID
     //参考：https://www.cnblogs.com/DevMuYuer/p/10088425.html
-    @GeneratedValue(strategy = GenerationType.AUTO, generator = "emp-id")
-    @GenericGenerator(name = "emp-id", strategy = "com.konvi.utils.EmpIDGenerator")
+    //@GeneratedValue(strategy = GenerationType.AUTO, generator = "emp-id")
+    //@GenericGenerator(name = "emp-id", strategy = "com.konvi.utils.EmpIDGenerator")
     private String empId;
 
     /**
@@ -99,7 +98,7 @@ public class Employees implements Serializable
      * 0 为未婚
      */
     //private Integer empMarital;
-    private Integer empMarital= EmpMaritalEnum.UNMARRIED.getCode(); //默认未婚
+    private Integer empMarital= InfMaritalEnum.UNMARRIED.getCode(); //默认未婚
 
     /**
      * 备注
@@ -119,9 +118,9 @@ public class Employees implements Serializable
      * 获取婚姻状态的枚举类
      */
     @JsonIgnore
-    public EmpMaritalEnum getEmpMaritalEnum()
+    public InfMaritalEnum getEmpMaritalEnum()
     {
-        return EnumUtil.getByCode(empMarital,EmpMaritalEnum.class);
+        return EnumUtil.getByCode(empMarital, InfMaritalEnum.class);
     }
 
 }

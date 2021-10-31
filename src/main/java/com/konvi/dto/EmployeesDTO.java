@@ -2,7 +2,7 @@ package com.konvi.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.konvi.entity.Employees;
-import com.konvi.enums.EmpMaritalEnum;
+import com.konvi.enums.InfMaritalEnum;
 import com.konvi.enums.EmpSexEnum;
 import com.konvi.utils.EnumUtil;
 import lombok.Data;
@@ -83,7 +83,7 @@ public class EmployeesDTO {
      * 0 为未婚
      */
     //private Integer empMarital;
-    private Integer empMarital= EmpMaritalEnum.UNMARRIED.getCode(); //默认未婚
+    private Integer empMarital= InfMaritalEnum.UNMARRIED.getCode(); //默认未婚
 
     /**
      * 备注
@@ -106,9 +106,9 @@ public class EmployeesDTO {
      * 获取婚姻状态的枚举类
      */
     @JsonIgnore
-    public EmpMaritalEnum getEmpMaritalEnum()
+    public InfMaritalEnum getEmpMaritalEnum()
     {
-        return EnumUtil.getByCode(empMarital,EmpMaritalEnum.class);
+        return EnumUtil.getByCode(empMarital, InfMaritalEnum.class);
     }
 
 }
