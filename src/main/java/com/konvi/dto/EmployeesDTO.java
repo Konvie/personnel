@@ -72,20 +72,6 @@ public class EmployeesDTO {
     private String empIdCard;
 
     /**
-     * 员工入职时间
-     */
-    @DateTimeFormat(pattern = "yyyy-MM-dd  HH:mm:ss")
-    private Date empEntry;
-
-    /**
-     *员工婚姻状况
-     * 1 为已婚
-     * 0 为未婚
-     */
-    //private Integer empMarital;
-    private Integer empMarital= InfMaritalEnum.UNMARRIED.getCode(); //默认未婚
-
-    /**
      * 备注
      */
     private String empRemarks;
@@ -102,13 +88,5 @@ public class EmployeesDTO {
         return EnumUtil.getByCode(empSex,EmpSexEnum.class);
     }
 
-    /**
-     * 获取婚姻状态的枚举类
-     */
-    @JsonIgnore
-    public InfMaritalEnum getEmpMaritalEnum()
-    {
-        return EnumUtil.getByCode(empMarital, InfMaritalEnum.class);
-    }
 
 }

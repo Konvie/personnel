@@ -11,7 +11,7 @@ import org.springframework.data.domain.Pageable;
  * @version 1.0
  * @date 2021/9/1
  */
-public interface IInformationService
+public interface IInfoService
 {
     /**
      * 根据员工编号查询员工背景信息

@@ -22,10 +22,10 @@
                 <li><a href="/personnel/evaluation/index">新增</a></li>
 
 
-                <li class="dropdown-header">工资发放</li>
-                <li><a href="/personnel/information/list">列表</a></li>
-                <li><a href="/personnel/information/index">新增</a></li>
-                <li><a href="/personnel/information/search">查询</a></li>
+                <li class="dropdown-header">背景信息</li>
+                <li><a href="/personnel/info/list">列表</a></li>
+                <li><a href="/personnel/info/index">新增</a></li>
+                <li><a href="/personnel/info/search">查询</a></li>
             </ul>
         </li>
 

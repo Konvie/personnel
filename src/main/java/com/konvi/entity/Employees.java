@@ -85,22 +85,6 @@ public class Employees implements Serializable
     private String empIdCard;
 
     /**
-     * 员工入职时间
-     */
-    @JsonFormat(pattern = "yyyy-MM-dd")
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
-    @CreationTimestamp  //这样入职时间就不会为空了
-    private Date empEntry;
-
-    /**
-     *员工婚姻状况
-     * 1 为已婚
-     * 0 为未婚
-     */
-    //private Integer empMarital;
-    private Integer empMarital= InfMaritalEnum.UNMARRIED.getCode(); //默认未婚
-
-    /**
      * 备注
      */
     private String empRemarks;
@@ -114,13 +98,5 @@ public class Employees implements Serializable
         return EnumUtil.getByCode(empSex,EmpSexEnum.class);
     }
 
-    /**
-     * 获取婚姻状态的枚举类
-     */
-    @JsonIgnore
-    public InfMaritalEnum getEmpMaritalEnum()
-    {
-        return EnumUtil.getByCode(empMarital, InfMaritalEnum.class);
-    }
 
 }

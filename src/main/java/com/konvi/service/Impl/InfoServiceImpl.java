@@ -1,11 +1,11 @@
 package com.konvi.service.Impl;
 
-import com.konvi.DAO.IInformationDAO;
+import com.konvi.DAO.IInfoDAO;
 import com.konvi.dto.InformationDTO;
 import com.konvi.entity.Information;
 import com.konvi.enums.ResultEnum;
 import com.konvi.exception.PersonnelException;
-import com.konvi.service.IInformationService;
+import com.konvi.service.IInfoService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -22,10 +22,10 @@ import javax.transaction.Transactional;
  */
 @Service
 @Transactional
-public class InformationServiceImpl implements IInformationService
+public class InfoServiceImpl implements IInfoService
 {
     @Autowired
-    private IInformationDAO informationDAO;
+    private IInfoDAO informationDAO;
 
 
     /**
@@ -74,7 +74,7 @@ public class InformationServiceImpl implements IInformationService
         //如果员工不存在，就抛出异常：员工不存在
         if (information == null)
         {
-            throw new PersonnelException(ResultEnum.EMPLOYEE_SALARIES_NOT_EXIST);
+            throw new PersonnelException(ResultEnum.EMPLOYEE_INFORMATION_NOT_EXIST);
         }
 
         else
@@ -95,7 +95,7 @@ public class InformationServiceImpl implements IInformationService
         Information information = informationDAO.findByEmpName(empName);
         if (information == null)
         {
-            throw new PersonnelException(ResultEnum.EMPLOYEE_SALARIES_NOT_EXIST);
+            throw new PersonnelException(ResultEnum.EMPLOYEE_INFORMATION_NOT_EXIST);
         }
 
         InformationDTO informationDTO = new InformationDTO();

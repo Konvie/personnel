@@ -21,12 +21,6 @@ import java.util.Date;
 @Data
 public class InformationForm
 {
-    @Id
-    /**
-    * 信息ID
-    */
-    private String infId;
-
     /**
      * 员工ID
      */

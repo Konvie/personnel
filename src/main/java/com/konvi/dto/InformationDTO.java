@@ -6,7 +6,7 @@ import javax.persistence.Id;
 import java.math.BigDecimal;
 
 /**
- * 工资传输对象
+ * 背景信息传输对象
  * @author konvi
  * @version 1.0
  * @date 2021/9/3

@@ -6,7 +6,7 @@ import com.konvi.entity.Information;
 import com.konvi.enums.ResultEnum;
 import com.konvi.exception.SalariesException;
 import com.konvi.form.InformationForm;
-import com.konvi.service.IInformationService;
+import com.konvi.service.IInfoService;
 import com.konvi.utils.KeyUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
@@ -25,13 +25,12 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
-import java.math.BigDecimal;
 import java.util.Map;
 
 
 /**
  * 背景表 Controller层
- * http://192.168.1.3/:8080/personnel/salaries/list
+ * http://192.168.1.3/:8080/personnel/info/list
  * @author konvi
  * @version 1.0
  * @date 2021/9/3
@@ -39,10 +38,10 @@ import java.util.Map;
 @Slf4j
 @Controller
 @RequestMapping("/info")
-public class InformationController
+public class InfoController
 {
     @Autowired
-    private IInformationService salariesService;
+    private IInfoService infoService;
 
     /**
      * 分页查询工资表
@@ -56,10 +55,10 @@ public class InformationController
     {
         PageRequest pageRequest = PageRequest.of(page - 1,size);
 
-        Page<Information> salariesPageList = salariesService.findAll(pageRequest);
+        Page<Information> infoPageList = infoService.findAll(pageRequest);
 
         // 带分页显示查询到的工资列表
-        map.put("salariesPageList",salariesPageList);
+        map.put("infoPageList",infoPageList);
 
         // 设置当前页
         map.put("currentPage",page);
@@ -81,10 +80,10 @@ public class InformationController
     {
         if (empId != null)
         {
-            Information information = salariesService.findById(empId);
-            map.put("salaries", information);
+            Information information = infoService.findById(empId);
+            map.put("information", information);
         }
-        return new ModelAndView("salaries/index",map);
+        return new ModelAndView("info/index",map);
     }
 
 
@@ -103,7 +102,7 @@ public class InformationController
         if (bindingResult.hasErrors())
         {
             session.setAttribute("msg",bindingResult.getFieldError().getDefaultMessage());
-            session.setAttribute("url",request.getContextPath()+"/salaries/index");
+            session.setAttribute("url",request.getContextPath()+"/info/index");
             return new ModelAndView("common/error");
         }
         Information information = new Information();
@@ -113,7 +112,7 @@ public class InformationController
             // StringUtils.hasText(String) 若String值为null或''等,则返回值为false
             if (StringUtils.hasText(informationForm.getEmpId()))
             {
-                information = salariesService.findById(informationForm.getEmpId());
+                information = infoService.findById(informationForm.getEmpId());
             } else // 如果员工编号为空,说明是新建工资信息
             {
                 informationForm.setEmpId(KeyUtil.genUniqueKey());
@@ -132,17 +131,17 @@ public class InformationController
             information.setSalFinal(salFinal);*/
 
             // 背景信息入库
-            salariesService.save(information);
+            infoService.save(information);
 
         } catch (SalariesException e)
         {
             session.setAttribute("msg",e.getMessage());
-            session.setAttribute("url","/personnel/salaries/index");
+            session.setAttribute("url","/personnel/info/index");
             return new ModelAndView("common/error");
         }
 
-        session.setAttribute("msg", ResultEnum.EMPLOYEE_SALARIES_SUCCESS.getMessage());
-        session.setAttribute("url","/personnel/salaries/list");
+        session.setAttribute("msg", ResultEnum.EMPLOYEE_INFORMATION_SUCCESS.getMessage());
+        session.setAttribute("url","/personnel/info/list");
         return new ModelAndView("common/success");
     }
 
@@ -157,15 +156,15 @@ public class InformationController
     {
         try
         {
-            salariesService.delete(empId);
+            infoService.delete(empId);
         } catch (SalariesException e)
         {
             map.put("msg",e.getMessage());
-            map.put("url","/personnel/salaries/list");
+            map.put("url","/personnel/info/list");
             return new ModelAndView("common/error",map);
         }
-        map.put("msg",ResultEnum.EMPLOYEE_SALARIES_SUCCESS.getMessage());
-        map.put("url","/personnel/salaries/list");
+        map.put("msg",ResultEnum.EMPLOYEE_INFORMATION_SUCCESS.getMessage());
+        map.put("url","/personnel/info/list");
         return new ModelAndView("common/success",map);
     }
 
@@ -182,11 +181,11 @@ public class InformationController
         String contextPath = "";
         InformationDTO informationDTO = new InformationDTO();
         try {
-            informationDTO = salariesService.findByEmpName(empName);
+            informationDTO = infoService.findByEmpName(empName);
         } catch (Exception e) {
             log.error("发生异常{}", e);
             contextPath = request.getContextPath(); // 灵活获取应用名 如/personnel
-            map.put("url", contextPath + "/salaries/search");
+            map.put("url", contextPath + "/info/search");
             map.put("msg", e.getMessage());
             return new ModelAndView("common/error", map);
         }

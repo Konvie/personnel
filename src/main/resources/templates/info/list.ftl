@@ -20,33 +20,29 @@
                             <th>序号</th>
                             <th>员工编号</th>
                             <th>员工姓名</th>
-                            <th>基本金额</th>
-                            <th>奖金金额</th>
-                            <th>奖金描述</th>
-                            <th>扣除金额</th>
-                            <th>扣除描述</th>
-                            <th>保险福利</th>
-                            <th>最终金额</th>
+                            <th>学历</th>
+                            <th>政治面貌</th>
+                            <th>入职时间</th>
+                            <th>籍贯</th>
+                            <th>婚姻状况</th>
                             <th>备注</th>
                             <th colspan="2">操作</th>
                         </tr>
                         </thead>
                         <tbody>
-                        <#list salariesPageList.content as information>
+                        <#list infoPageList.content as info>
                             <tr>
-                                <td>${salaries_index+1}</td>
-                                <td>${information.empId}</td>
-                                <td>${information.empName}</td>
-                                <td>${information.salBase}</td>
-                                <td>${information.salBonus}</td>
-                                <td>${information.salBonusDescribes}</td>
-                                <td>${information.salFine}</td>
-                                <td>${information.salFineDescribes}</td>
-                                <td>${information.salBenefits}</td>
-                                <td>${information.salFinal}</td>
-                                <td>${information.salRemarks}</td>
-                                <td><a href="/personnel/information/index?empId=${information.empId}">修改</a></td>
-                                <td><a href="/personnel/information/delete?empId=${information.empId}">删除</a></td>
+                                <td>${info_index+1}</td>
+                                <td>${info.empId}</td>
+                                <td>${info.empName}</td>
+                                <td>${info.infEducation}</td>
+                                <td>${info.infPolitical}</td>
+                                <td>${info.infEntry}</td>
+                                <td>${info.infPlace}</td>
+                                <td>${info.getInfMaritalEnum().message}</td>
+                                <td>${info.infRemarks}</td>
+                                <td><a href="/personnel/info/index?empId=${info.empId}">修改</a></td>
+                                <td><a href="/personnel/info/delete?empId=${info.empId}">删除</a></td>
                             </tr>
                         </#list>
                         </tbody>
@@ -63,32 +59,32 @@
                             </li>
                         <#else>
                             <li>
-                                <a href="/personnel/information/list?page=${currentPage - 1}&size=${size}">上一页</a>
+                                <a href="/personnel/info/list?page=${currentPage - 1}&size=${size}">下一页</a>
                             </li>
                         </#if>
                         <#--上一页处理 end-->
                         <#--代循环遍历(根据DB中查询出来的带分页查询所有订单列表)-->
-                        <#list 1..salariesPageList.getTotalPages() as index>
+                        <#list 1..infoPageList.getTotalPages() as index>
                         <#--当前页面置灰-->
                             <#if currentPage == index>
                                 <li class="disabled">
-                                    <a href="/personnel/information/list?page=${index}&size=${size}">${index}</a>
+                                    <a href="/personnel/info/list?page=${index}&size=${size}">${index}</a>
                                 </li>
                             <#else>
                                 <li>
-                                    <a href="/personnel/information/list?page=${index}&size=${size}">${index}</a>
+                                    <a href="/personnel/info/list?page=${index}&size=${size}">${index}</a>
                                 </li>
                             </#if>
                         </#list>
                         <#--代循环遍历(根据DB中查询出来的带分页查询所有订单列表)-->
                         <#-- 下一页处理 start-->
-                        <#if currentPage gte salariesPageList.getTotalPages()>
+                        <#if currentPage gte infoPageList.getTotalPages()>
                             <li>
                                 <a href="#">下一页</a>
                             </li>
                         <#else>
                             <li>
-                                <a href="/personnel/information/list?page=${currentPage + 1}&size=${size}">上一页</a>
+                                <a href="/personnel/info/list?page=${currentPage + 1}&size=${size}">上一页</a>
                             </li>
                         </#if>
                         <#-- 下一页处理 end-->

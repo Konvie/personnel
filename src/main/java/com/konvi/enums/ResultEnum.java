@@ -13,10 +13,10 @@ import lombok.NoArgsConstructor;
 public enum ResultEnum
 {
     EMPLOYEE_NOT_EXIST(100,"该员工不存在"),
-    EMPLOYEE_SALARIES_NOT_EXIST(101,"员工工资信息不存在"),
+    EMPLOYEE_INFORMATION_NOT_EXIST(101,"员工背景信息不存在"),
     EMPLOYEE_EVALUATION_NOT_EXIST(102,"员工评价信息不存在"),
     DEPARTMENT_NOT_EXIST(103,"部门不存在"),
-    EMPLOYEE_SALARIES_SUCCESS(114,"员工工资操作成功"),
+    EMPLOYEE_INFORMATION_SUCCESS(114,"员工背景操作成功"),
     EMPLOYEE_SUCCESS(115,"员工操作成功"),
     EMPLOYEE_EVALUATION_SUCCESS(116, "员工评价操作成功"),
     EMPLOYEE_DEPARTMENTS_SUCCESS(117,"员工部门操作成功");

@@ -13,38 +13,34 @@
                             <#--显示系统时间-->
                             <div class="showTime">当前时间：2021年8月17-12时35分16秒</div>
 
-                            <form role="form" method="post" action="/personnel/information/save">
+                            <form role="form" method="post" action="/personnel/info/save">
                                 <div class="form-group">
                                     <label>员工姓名</label>
                                     <input name="empName" type="text" class="form-control" value="${(information.empName)!''}"/>
                                 </div>
                                 <div class="form-group">
-                                    <label>基本金额</label>
-                                    <input name="salBase" type="number" class="form-control" value="${(information.salBase)!''}"/>
+                                    <label>学历</label>
+                                    <input name="infEducation" type="text" class="form-control" value="${(information.infEducation)!''}"/>
                                 </div>
                                 <div class="form-group">
-                                    <label>奖金金额</label>
-                                    <input name="salBonus" type="number" class="form-control" value="${(information.salBonus)!''}"/>
+                                    <label>政治面貌</label>
+                                    <input name="infPolitical" type="text" class="form-control" value="${(information.infPolitical)!''}"/>
                                 </div>
                                 <div class="form-group">
-                                    <label>奖金描述</label>
-                                    <input name="salBonusDescribes" type="text" class="form-control" value="${(information.salBonusDescribes)!''}"/>
+                                    <label>入职时间</label>
+                                    <input name="infEntry" type="text" class="form-control" value="${(information.infEntry)!''}"/>
                                 </div>
                                 <div class="form-group">
-                                    <label>扣除金额</label>
-                                    <input name="salFine" type="number" class="form-control" value="${(information.salFine)!''}"/>
+                                    <label>籍贯</label>
+                                    <input name="infPlace" type="number" class="form-control" value="${(information.infPlace)!''}"/>
                                 </div>
                                 <div class="form-group">
-                                    <label>扣除描述</label>
-                                    <input name="salFineDescribes" type="text" class="form-control" value="${(information.salFineDescribes)!''}"/>
-                                </div>
-                                <div class="form-group">
-                                    <label>保险福利</label>
-                                    <input name="salBenefits" type="number" class="form-control" value="${(information.salBenefits)!''}"/>
+                                    <label>婚姻状况</label>
+                                    <input name="infMarital" type="text" class="form-control" value="${(information.infMarital)!''}"/>
                                 </div>
                                 <div class="form-group">
                                     <label>备注</label>
-                                    <input name="salRemarks" type="text" class="form-control" value="${(information.salRemarks)!''}"/>
+                                    <input name="infRemarks" type="number" class="form-control" value="${(information.infRemarks)!''}"/>
                                 </div>
                                 <button type="submit" class="btn btn-default">提交</button>
                                 <input type="hidden" name="empId" value="${(information.empId)!''}">

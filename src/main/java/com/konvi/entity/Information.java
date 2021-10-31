@@ -79,7 +79,7 @@ public class Information implements Serializable
      * 获取婚姻状态的枚举类
      */
     @JsonIgnore
-    public InfMaritalEnum getEmpMaritalEnum()
+    public InfMaritalEnum getInfMaritalEnum()
     {
         return EnumUtil.getByCode(infMarital,InfMaritalEnum.class);
     }
